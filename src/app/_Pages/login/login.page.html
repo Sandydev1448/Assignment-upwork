@@ -1,0 +1,52 @@
+
+<ion-content fullscreen="true" slot="fixed" class="bg-class">
+
+  <section id="login-section">
+      <div class="app-logo ion-text-center">
+          <app-logo [width]="250"></app-logo>
+          <h6>v{{appVersion}}</h6>
+      </div>
+
+      <ng-container *ngIf="loginForm">
+          <div class="login-form ion-padding">
+              <form [formGroup]="loginForm" (ngSubmit)="tryLogin()">
+                <mat-form-field appearance="outline">
+                      <mat-label>Username</mat-label>
+                      <input matInput type="text" formControlName="username" required inputmode="email" >
+                      <mat-icon matPrefix>verified_user</mat-icon>
+                      <mat-error *ngIf="formCheck.username.errors">
+                          <div *ngIf="formCheck.username.errors.required">Required*</div>
+                      </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline">
+                      <mat-label>Password</mat-label>
+                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required >
+                      <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                          [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                      <mat-icon matPrefix>lock</mat-icon>
+                      <mat-error *ngIf="formCheck.password.errors">
+                          <div *ngIf="formCheck.password.errors.required">Required*</div>
+                      </mat-error>
+                  </mat-form-field>
+
+                  <div class="btn-submit">
+                      <button mat-raised-button [disabled]="!loginForm.valid">
+                          <span >Sign In</span>
+                      </button>
+                  </div>
+              </form>
+          </div>
+      </ng-container>
+
+
+      <div class="other_links ion-text-center">
+         <p class="register"> Don't have an account?  <a >Sign up here</a> </p>
+       </div>
+
+  </section>
+
+
+</ion-content>
